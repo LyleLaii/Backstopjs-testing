@@ -1,0 +1,52 @@
+{
+    "id": "bq_web",
+    "viewports": [],
+    "onBeforeScript": "puppet/onBefore.js",
+    "onReadyScript": "puppet/onReady.js",
+    "scenarios": [
+        {
+            "label": "desktop_test",
+            "test": 1,
+            "url": "https://bigquant.com",
+            "viewports": {
+                "label": "desktop",
+                "width": 1920,
+                "height": 1080
+            },
+            "misMatchThreshold": 0.01,
+            "requireSameDimensions": true
+        },
+        {
+            "label": "desktop_test1",
+            "url": "a",
+            "test": 1,
+            "viewports": {
+                "label": "desktop",
+                "width": 1920,
+                "height": 1080
+            },
+            "misMatchThreshold": 0.01,
+            "requireSameDimensions": true
+        }
+    ],
+    "paths": {
+        "bitmaps_reference": "projects/bq_web/bitmaps_reference",
+        "bitmaps_test": "projects/bq_web/bitmaps_test",
+        "engine_scripts": "engine_scripts",
+        "html_report": "projects/bq_web/html_report",
+        "ci_report": "projects/bq_web/ci_report"
+    },
+    "report": [
+        "browser"
+    ],
+    "engine": "puppeteer",
+    "engineOptions": {
+        "args": [
+            "--no-sandbox"
+        ]
+    },
+    "asyncCaptureLimit": 5,
+    "asyncCompareLimit": 10,
+    "debug": false,
+    "debugWindow": false
+}
