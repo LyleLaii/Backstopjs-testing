@@ -1,4 +1,4 @@
-const project_path = require('../project_path_config')
+const project_path = require("../../../project_configs/bq_web/common_config")
 const codepage = require(project_path.PAGE_ELEMENTS_PATH + 'codepage_ele')
 
 
