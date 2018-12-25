@@ -1,0 +1,45 @@
+backstopjs_framework
+│  backstop.config.js	// 默认配置
+│  backstop.js			// 配置生成、测试运行脚本
+│  bq_web_backstop.json	// 测试配置
+│  scenarios.js			// 用例处理脚本
+│  
+├─engine_scripts
+│  └─puppet
+│      ├─bq_web
+│      │      mainpage_banner_check.js
+│      │      项目脚本
+│      │      
+│      └─common
+│              base.js
+│              onBefore.js
+│              onReady.js
+│              通用脚本
+│          
+├─projects_cases
+│  └─bq_web
+│      │  project_path_config.js // 路径配置文件
+│      │  
+│      ├─desktop
+│      │      constants.js	//默认配置
+│      │      test_armorypage_general.js
+│      │      测试脚本
+│      │      
+│      ├─phone
+│      └─table
+├─projects_data	// 测试结果保存
+│  └─bq_web
+│          test_data.txt
+│          
+└─project_configs
+    └─bq_web
+        │  common_config.js //通用配置
+        │  
+        ├─cookies
+        │      desktop_itsatest.json
+        │      cookies文件
+		│	    
+        └─elements
+                armorypage_ele.js
+				页面元素定位配置
+                
