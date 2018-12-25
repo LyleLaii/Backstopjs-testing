@@ -1,0 +1,407 @@
+{
+    "id": "bq_web",
+    "viewports": [],
+    "onReadyScript": "puppet/common/onReady.js",
+    "scenarios": [
+        {
+            "label": "desktop_Armorypage_Mine general",
+            "url": "https://bigquant.com/armory/mine",
+            "misMatchThreshold": 0.01,
+            "requireSameDimensions": true,
+            "viewports": [
+                {
+                    "label": "desktop",
+                    "width": 1920,
+                    "height": 1080
+                }
+            ],
+            "cookiePath": "./project_configs/bq_web/cookies/desktop_itsatest.json",
+            "onBeforeScript": "puppet/common/onBefore.js",
+            "readySelectors": [
+                "#page-content > div > div.ivu-tabs-content > div:nth-child(1) > div"
+            ],
+            "delay": 1000
+        },
+        {
+            "label": "desktop_Armorypage_Shared general",
+            "viewports": [
+                {
+                    "label": "desktop",
+                    "width": 1920,
+                    "height": 1080
+                }
+            ],
+            "misMatchThreshold": 0.01,
+            "requireSameDimensions": true,
+            "url": "https://bigquant.com/armory/shared",
+            "readySelectors": [
+                "#main > div.main-container"
+            ],
+            "delay": 1000
+        },
+        {
+            "label": "desktop_Armorypage_Mall general",
+            "viewports": [
+                {
+                    "label": "desktop",
+                    "width": 1920,
+                    "height": 1080
+                }
+            ],
+            "misMatchThreshold": 0.01,
+            "requireSameDimensions": true,
+            "url": "https://bigquant.com/armory/mall",
+            "readySelectors": [
+                "#content > div > main"
+            ],
+            "delay": 1000
+        },
+        {
+            "label": "desktop_Codepage general",
+            "url": "https://i.bigquant.com/",
+            "viewports": [
+                {
+                    "label": "desktop",
+                    "width": 1920,
+                    "height": 1080
+                }
+            ],
+            "misMatchThreshold": 0.01,
+            "requireSameDimensions": true,
+            "cookiePath": "./project_configs/bq_web/cookies/desktop_itsatest.json",
+            "onBeforeScript": "puppet/common/onBefore.js",
+            "readySelectors": [
+                "#filebrowser > div.p-Widget.jp-DirListing.jp-FileBrowser-listing > ul"
+            ],
+            "delay": 2000
+        },
+        {
+            "label": "desktop_Docspage_Usinghelp",
+            "url": "https://bigquant.com/docs/#/usinghelp",
+            "viewports": [
+                {
+                    "label": "desktop",
+                    "width": 1920,
+                    "height": 1080
+                }
+            ],
+            "misMatchThreshold": 0.01,
+            "requireSameDimensions": true,
+            "readySelector": "#main",
+            "delay": 2000
+        },
+        {
+            "label": "desktop_Mainpage_Banner1",
+            "url": "https://bigquant.com/",
+            "clickSelectors": [
+                "div.m-modal-mask:nth-child(7) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1)",
+                "#carouselIndicators > ol > li:nth-child(1)"
+            ],
+            "viewports": [
+                {
+                    "label": "desktop",
+                    "width": 1920,
+                    "height": 1080
+                }
+            ],
+            "misMatchThreshold": 0.01,
+            "requireSameDimensions": true,
+            "selectors": [
+                "#carouselIndicators > div"
+            ]
+        },
+        {
+            "label": "desktop_Mainpage_Banner2",
+            "url": "https://bigquant.com/",
+            "clickSelectors": [
+                "div.m-modal-mask:nth-child(7) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1)",
+                "#carouselIndicators > ol > li:nth-child(2)"
+            ],
+            "viewports": [
+                {
+                    "label": "desktop",
+                    "width": 1920,
+                    "height": 1080
+                }
+            ],
+            "misMatchThreshold": 0.01,
+            "requireSameDimensions": true,
+            "selectors": [
+                "#carouselIndicators > div"
+            ]
+        },
+        {
+            "label": "desktop_Mainpage_Banner3",
+            "url": "https://bigquant.com/",
+            "clickSelectors": [
+                "div.m-modal-mask:nth-child(7) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1)",
+                "#carouselIndicators > ol > li:nth-child(3)"
+            ],
+            "viewports": [
+                {
+                    "label": "desktop",
+                    "width": 1920,
+                    "height": 1080
+                }
+            ],
+            "misMatchThreshold": 0.01,
+            "requireSameDimensions": true,
+            "selectors": [
+                "#carouselIndicators > div"
+            ]
+        },
+        {
+            "label": "desktop_Mainpage_Banner4",
+            "url": "https://bigquant.com/",
+            "clickSelectors": [
+                "div.m-modal-mask:nth-child(7) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1)",
+                "#carouselIndicators > ol > li:nth-child(4)"
+            ],
+            "viewports": [
+                {
+                    "label": "desktop",
+                    "width": 1920,
+                    "height": 1080
+                }
+            ],
+            "misMatchThreshold": 0.01,
+            "requireSameDimensions": true,
+            "selectors": [
+                "#carouselIndicators > div"
+            ]
+        },
+        {
+            "label": "desktop_Mainpage_Guidetab nologin",
+            "url": "https://bigquant.com/",
+            "selectors": [
+                "#body > div.m-modal-mask.userGuideModal > div > div"
+            ],
+            "viewports": [
+                {
+                    "label": "desktop",
+                    "width": 1920,
+                    "height": 1080
+                }
+            ],
+            "requireSameDimensions": true,
+            "misMatchThreshold": 1.5
+        },
+        {
+            "label": "desktop_Mainpage_Guidetab login",
+            "url": "https://bigquant.com/",
+            "cookiePath": "./project_configs/bq_web/cookies/desktop_itsatest.json",
+            "onBeforeScript": "puppet/common/onBefore.js",
+            "clickSelectors": [
+                "#tourist-signuo-guide"
+            ],
+            "selectors": [
+                "#body > div.m-modal-mask.userGuideModal > div > div"
+            ],
+            "viewports": [
+                {
+                    "label": "desktop",
+                    "width": 1920,
+                    "height": 1080
+                }
+            ],
+            "requireSameDimensions": true,
+            "misMatchThreshold": 1.5
+        },
+        {
+            "label": "desktop_Mainpage_Other",
+            "url": "https://bigquant.com/",
+            "hideSelectors": [
+                "#body > nav",
+                "#carouselIndicators > div",
+                "#body > div.content > div:nth-child(1)"
+            ],
+            "removeSelectors": [
+                "#tourist-signuo-guide > img",
+                "#livezilla_wm"
+            ],
+            "clickSelectors": [
+                "div.m-modal-mask:nth-child(7) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1)"
+            ],
+            "viewports": [
+                {
+                    "label": "desktop",
+                    "width": 1920,
+                    "height": 1080
+                }
+            ],
+            "misMatchThreshold": 0.01,
+            "requireSameDimensions": true
+        },
+        {
+            "label": "desktop_Mainpage_Strategy",
+            "url": "https://bigquant.com/",
+            "viewports": [
+                {
+                    "label": "desktop",
+                    "width": 1920,
+                    "height": 2160
+                }
+            ],
+            "misMatchThreshold": 0.01,
+            "requireSameDimensions": true,
+            "removeSelectors": [
+                "#body > nav",
+                "#tourist-signuo-guide > img"
+            ],
+            "onReadyScript": "puppet/bq_web/mainpage_strategy_check.js",
+            "clickSelector": "div.m-modal-mask:nth-child(7) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1)",
+            "selectors": [
+                "#body > div.content > div:nth-child(1)"
+            ]
+        },
+        {
+            "label": "desktop_Tradepage general",
+            "url": "https://bigquant.com/trade",
+            "viewports": [
+                {
+                    "label": "desktop",
+                    "width": 1920,
+                    "height": 1080
+                }
+            ],
+            "misMatchThreshold": 0.01,
+            "requireSameDimensions": true,
+            "cookiePath": "./project_configs/bq_web/cookies/desktop_itsatest.json",
+            "onBeforeScript": "puppet/common/onBefore.js",
+            "readySelectors": [
+                "#content > div > div"
+            ],
+            "delay": 2000
+        },
+        {
+            "label": "desktop_Tutorialpage_Main",
+            "url": "https://bigquant.com/tutorial/",
+            "onReadyScript": "puppet/bq_web/tutorialpage_new1.js",
+            "viewports": [
+                {
+                    "label": "desktop",
+                    "width": 1920,
+                    "height": 1080
+                }
+            ],
+            "misMatchThreshold": 0.01,
+            "requireSameDimensions": true
+        },
+        {
+            "label": "desktop_Tutorialpage_Ai",
+            "url": "https://bigquant.com/tutorial/",
+            "clickSelector": "#content > div > div > div.body-nav.fixed > div > div > div:nth-child(6)",
+            "hoverSelector": "#ai > div > ul > li:nth-child(4)",
+            "onReadyScript": "puppet/bq_web/tutorialpage_check.js",
+            "viewports": [
+                {
+                    "label": "desktop",
+                    "width": 1920,
+                    "height": 1080
+                }
+            ],
+            "misMatchThreshold": 0.01,
+            "requireSameDimensions": true
+        },
+        {
+            "label": "desktop_Tutorialpage_Bigstudio",
+            "url": "https://bigquant.com/tutorial/",
+            "clickSelector": "#content > div > div > div.body-nav.fixed > div > div > div:nth-child(2)",
+            "hoverSelector": "#bigstudio > div > ul > li:nth-child(4)",
+            "onReadyScript": "puppet/bq_web/tutorialpage_check.js",
+            "viewports": [
+                {
+                    "label": "desktop",
+                    "width": 1920,
+                    "height": 1080
+                }
+            ],
+            "misMatchThreshold": 0.01,
+            "requireSameDimensions": true
+        },
+        {
+            "label": "desktop_Tutorialpage_Ceying",
+            "url": "https://bigquant.com/tutorial/",
+            "clickSelector": "#content > div > div > div.body-nav.fixed > div > div > div:nth-child(4)",
+            "hoverSelector": "#ceying > div > ul > li:nth-child(4)",
+            "onReadyScript": "puppet/bq_web/tutorialpage_check.js",
+            "viewports": [
+                {
+                    "label": "desktop",
+                    "width": 1920,
+                    "height": 1080
+                }
+            ],
+            "misMatchThreshold": 0.01,
+            "requireSameDimensions": true
+        },
+        {
+            "label": "desktop_Tutorialpage_Jinr",
+            "url": "https://bigquant.com/tutorial/",
+            "clickSelector": "#content > div > div > div.body-nav.fixed > div > div > div:nth-child(7)",
+            "hoverSelector": "#jinr > div > ul > li:nth-child(4)",
+            "onReadyScript": "puppet/bq_web/tutorialpage_check.js",
+            "viewports": [
+                {
+                    "label": "desktop",
+                    "width": 1920,
+                    "height": 1080
+                }
+            ],
+            "misMatchThreshold": 0.01,
+            "requireSameDimensions": true
+        },
+        {
+            "label": "desktop_Tutorialpage_Math",
+            "url": "https://bigquant.com/tutorial/",
+            "clickSelector": "#content > div > div > div.body-nav.fixed > div > div > div:nth-child(5)",
+            "hoverSelector": "#math > div > ul > li:nth-child(4)",
+            "onReadyScript": "puppet/bq_web/tutorialpage_check.js",
+            "viewports": [
+                {
+                    "label": "desktop",
+                    "width": 1920,
+                    "height": 1080
+                }
+            ],
+            "misMatchThreshold": 0.01,
+            "requireSameDimensions": true
+        },
+        {
+            "label": "desktop_Tutorialpage_Python",
+            "url": "https://bigquant.com/tutorial/",
+            "clickSelector": "#content > div > div > div.body-nav.fixed > div > div > div:nth-child(3)",
+            "hoverSelector": "#python > div > ul > li:nth-child(4)",
+            "onReadyScript": "puppet/bq_web/tutorialpage_check.js",
+            "viewports": [
+                {
+                    "label": "desktop",
+                    "width": 1920,
+                    "height": 1080
+                }
+            ],
+            "misMatchThreshold": 0.01,
+            "requireSameDimensions": true
+        }
+    ],
+    "paths": {
+        "bitmaps_reference": "projects_data/bq_web/bitmaps_reference",
+        "bitmaps_test": "projects_data/bq_web/bitmaps_test",
+        "engine_scripts": "engine_scripts",
+        "html_report": "projects_data/bq_web/html_report",
+        "ci_report": "projects_data/bq_web/ci_report"
+    },
+    "report": [
+        "browser"
+    ],
+    "engine": "puppeteer",
+    "engineOptions": {
+        "args": [
+            "--no-sandbox"
+        ]
+    },
+    "asyncCaptureLimit": 5,
+    "asyncCompareLimit": 10,
+    "debug": false,
+    "debugWindow": false
+}

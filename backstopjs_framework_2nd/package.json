@@ -1,0 +1,27 @@
+{
+    "name": "visual-testing-backstopjs",
+    "version": "1.0.0",
+    "description": "Visual Regression Test Automation Framework",
+    "author": "Marc Dacanay",
+    "scripts": {
+        "reference:web-desktop": "node backstop.js --reference -p web -v desktop",
+        "test:web-desktop": "node backstop.js --test -p web -v desktop",
+        "approve:web-desktop": "node backstop.js --approve -p web -v desktop",
+        "openReport:web-desktop": "node backstop.js --openReport -p web -v desktop",
+        "reference:web-phone": "node backstop.js --reference -p web -v phone",
+        "test:web-phone": "node backstop.js --test -p web -v phone",
+        "approve:web-phone": "node backstop.js --approve -p web -v phone",
+        "openReport:web-phone": "node backstop.js --openReport -p web -v phone",
+        "reference:web-tablet": "node backstop.js --reference -p web -v tablet",
+        "test:web-tablet": "node backstop.js --test -p web -v tablet",
+        "approve:web-tablet": "node backstop.js --approve -p web -v tablet",
+        "openReport:web-tablet": "node backstop.js --openReport -p web -v tablet",
+        "downloadRefPics": "node ./scripts/syncRefPics.js --downloadRefPics",
+        "forceDownloadRefPics": "node ./scripts/syncRefPics.js --forceDownloadRefPics",
+        "uploadRefPics": "node ./scripts/syncRefPics.js --uploadRefPics"
+    },
+    "dependencies": {
+        "backstopjs": "^3.5.10",
+        "yargs": "^12.0.1"
+    }
+}
