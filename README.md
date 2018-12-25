@@ -317,7 +317,70 @@ exports.COOKIES_PATH = './project_configs/bq_web/cookies/'
 exports.PROJECT_SCRIPT_PATH = 'puppet/bq_web/'
 
 ```
-
+## backstopjs_framework_2nd
+目录树如下
+```
+backstopjs_framework_2nd
+│  backstop.config.js
+│  backstop.js
+│  bq_web_backstop.json
+│  package.json
+│  scenarios.js
+│  
+├─engine_scripts
+│  └─puppet
+│      ├─bq_web
+│      │      mainpage_banner_check.js
+│      │      mainpage_strategy_check.js
+│      │      project_path_config.js
+│      │      tutorialpage_check.js
+│      │      tutorialpage_new1.js
+│      │      
+│      └─common
+│              base.js
+│              clickAndHoverHelper.js
+│              delay.js
+│              ignoreCSP.js
+│              interceptImages.js
+│              loadCookies.js
+│              onBefore.js
+│              onReady.js
+│              
+├─projects_cases
+│  └─bq_web
+│      ├─desktop
+│      │      test_armorypage_general.js
+│      │      test_codepage_general.js
+│      │      test_docspage.js
+│      │      test_mainpage_banner.js
+│      │      test_mainpage_guidetab.js
+│      │      test_mainpage_other.js
+│      │      test_mainpage_strategy.js
+│      │      test_tradepage_general.js
+│      │      test_tutorialpage.js
+│      │      
+│      ├─phone
+│      └─table
+├─projects_data
+│  └─bq_web
+│          test_data.txt
+│          
+└─project_configs
+    └─bq_web
+        │  common_config.js
+        │  
+        ├─cookies
+        │      desktop_itsatest.json
+        │      
+        └─elements
+                armorypage_ele.js
+                codepage_ele.js
+                docspage_ele.js
+                mainpage_ele.js
+                tradepage_ele.js
+                tutorialpage_ele.js
+```
+与backstopjs_framework类似，将配置文件统一，直接在用例中体现，而非在生成配置时添加。
 
 ## backstopjs_framework_simple
 目录树如下
