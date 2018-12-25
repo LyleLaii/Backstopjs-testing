@@ -2,19 +2,30 @@ const fs = require('fs');
 const backstop = require('backstopjs');
 const args = require('yargs').argv;
 const project = args.p;
-// const view = args.v;
-const filter = args.filter;
-// const constants = require('./scenarios');
-// const projectConstants = require(`./projects/${project}/constants`);
+const filter = args.f;
+const cases_path = "./projects_cases/"
+
+
+const folders = fs.readdirSync(cases_path)
+var projects = []
+folders.forEach(function (item, index) {
+    let stat = fs.lstatSync(cases_path + item)
+    if (stat.isDirectory() === true) {
+        projects.push(item)
+    }
+})
+
+if(!(projects.includes(project))) {
+    console.log(`不存在 ${project} 项目，请检查输入`)
+    console.log(`目前有的项目为：\n ${projects} \n`)
+}
 
 const projectData = require(`./scenarios.js`)({
     project: project
 });
 
-
 const projectConfig = require("./backstop.config.js")({
     project: project,
-    // viewport: projectConstants.VIEWPORTS[view],
     scenarios: projectData.scenarios.map((scenario) => {
         return Object.assign({}, scenario);
     })
@@ -44,9 +55,9 @@ fs.writeFile(fileName, JSON.stringify(projectConfig, null,
     
     4), 'utf8', () => {
     console.log(`Successfully generated ${fileName} file.`);
-    // if (commandToRun !== '') {
-    //     console.log(`Executing Command: ${commandToRun}`);
-    //     backstop(commandToRun, { docker: true, config: fileName , filter:filter});
-    // }
+    if (commandToRun !== '') {
+        console.log(`Executing Command: ${commandToRun}`);
+        backstop(commandToRun, { docker: false, config: fileName , filter: filter});
+    }
 });
 

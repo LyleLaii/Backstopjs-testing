@@ -19,7 +19,6 @@ module.exports = (options) => {
         for (const file of all_files) {
             if (reg.test(file)) files.push(file);
         }
-        
         if (files.length == 0) continue;
        
         let basic_conf = require(folder + 'constants.js')
@@ -29,8 +28,12 @@ module.exports = (options) => {
             let test_cases = require(file_path).scenarios
             for (const acase of test_cases) {
                 acase.label = basic_conf.DEFAULT_LABEL + acase.label
-                if (!acase.hasOwnProperty("url")){
+                if ((!acase.hasOwnProperty("url")) && (!acase.hasOwnProperty("url_path"))){
                     acase.url = basic_conf.DEFAULT_URL
+                }
+                if (acase.hasOwnProperty("url_path")) {
+                    acase.url = basic_conf.DEFAULT_URL + '/' + acase.url_path;
+                    delete acase.url_path
                 }
                 if (!acase.hasOwnProperty("viewports")){
                     acase.viewports = basic_conf.DEFAULT_VIEWPORTS
@@ -41,7 +44,6 @@ module.exports = (options) => {
                 if (!acase.hasOwnProperty("requireSameDimensions")){
                     acase.requireSameDimensions = basic_conf.DEFAULT_REQUIRE_SAME_DIMENSIONS
                 }
-                console.log(acase)
                 scenarios = scenarios.concat(acase)
             }
         })
