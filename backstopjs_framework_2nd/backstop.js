@@ -20,7 +20,7 @@ if(!(projects.includes(project))) {
     console.log(`目前有的项目为：\n ${projects} \n`)
 }
 
-const projectData = require(`./scenarios.js`)({
+const projectData = require(`./projects_cases/scenarios.js`)({
     project: project
 });
 
