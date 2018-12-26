@@ -10,9 +10,8 @@ exports.COOKIES_PATH = './project_configs/bq_web/cookies/'
 
 exports.PROJECT_SCRIPT_PATH = 'puppet/bq_web/'
 
-exports.DEFAULT_DESKTOP_CONF ={
-    'prefix_label': 'desktop_',
-    'viewports': [
+exports.VIEWPORTS ={
+    'desktop': [
     {
     "label": "desktop",
     "width": 1920,
