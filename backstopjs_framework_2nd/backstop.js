@@ -1,5 +1,5 @@
 const fs = require('fs');
-// const backstop = require('backstopjs');
+const backstop = require('backstopjs');
 const args = require('yargs').argv;
 const project = args.p;
 const filter = args.f;
@@ -55,9 +55,9 @@ fs.writeFile(fileName, JSON.stringify(projectConfig, null,
     
     4), 'utf8', () => {
     console.log(`Successfully generated ${fileName} file.`);
-    // if (commandToRun !== '') {
-    //     console.log(`Executing Command: ${commandToRun}`);
-    //     backstop(commandToRun, { docker: false, config: fileName , filter: filter});
-    // }
+    if (commandToRun !== '') {
+        console.log(`Executing Command: ${commandToRun}`);
+        backstop(commandToRun, { docker: false, config: fileName , filter: filter});
+    }
 });
 

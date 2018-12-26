@@ -6,19 +6,21 @@
 
 首先感谢Marc Roland Dacanay的[代码](https://github.com/marcdacz/visual-testing-backstopjs)
 
-backstopjs_framework 更适用与多项目
+backstopjs_framework/_2nd 更适用与多项目
 
 backstopjs_framework_simple 更适用与单项目
 
 
-## backstopjs_framework
+## backstopjs_framework_2nd
+个人推介，更接近PO模式思想
 目录树如下
 ```
-backstopjs_framework
-│  backstop.config.js // 默认配置
-│  backstop.js      // 配置生成、测试运行脚本
-│  bq_web_backstop.json // 测试配置
-│  scenarios.js     // 用例处理脚本
+backstopjs_framework_2nd
+│  backstop.config.js
+│  backstop.js
+│  bq_web_backstop.json
+│  package.json
+│  scenarios.js.bak   // 可与/projects_cases目录下的scenarios.js调换，只修改了路径调用
 │  
 ├─engine_scripts
 │  └─puppet
@@ -33,32 +35,34 @@ backstopjs_framework
 │              通用脚本
 │          
 ├─projects_cases
+│  │  scenarios.js    // scenarios生成脚本
+│  │  
 │  └─bq_web
-│      │  project_path_config.js // 路径配置文件
-│      │  
 │      ├─desktop
-│      │      constants.js  //默认配置
 │      │      test_armorypage_general.js
-│      │      测试脚本
+│      │      测试用例脚本
 │      │      
 │      ├─phone
 │      └─table
-├─projects_data // 测试结果保存
+├─projects_data       // 测试数据
 │  └─bq_web
 │          test_data.txt
 │          
 └─project_configs
+    │  scenarios_config.js   // 测试用例转化scenario脚本，主要填充默认配置
+    │  
     └─bq_web
-        │  common_config.js //通用配置
+        │  constants_config.js // 默认固定配置
         │  
         ├─cookies
-        │      desktop_itsatest.json
-        │      cookies文件
-        │     
+        │      desktop_itsatest.json  // cookies文件目录
+        │      
         └─elements
                 armorypage_ele.js
-        页面元素定位配置
+                页面元素定位
+                
 ```
+与backstopjs_framework类似，将配置文件统一，并在生成配置时添加。
 
 ### backstop.js
 相比于原版，把`viewports`的配置划分到了用例目录下，不再手动控制；同时增加`filter`参数，用于只执行部分测试。
@@ -86,8 +90,8 @@ if(!(projects.includes(project))) {
     console.log(`目前有的项目为：\n ${projects} \n`)
 }
 
-// 通过scenarios.js脚本配置测试用例
-const projectData = require(`./scenarios.js`)({
+// 通过scenarios.js脚本配置测试用例，根据实际情况调整
+const projectData = require(`./projects_cases/scenarios.js`)({
     project: project
 });
 
@@ -160,6 +164,229 @@ module.exports = options => {
 	}
 }
 ```
+### project_cases/scenarios.js
+增加目录下用例查找功能
+```
+module.exports = (options) => {
+    var path = require('path');
+    const fs = require('fs')
+    const scenarios_path = `./projects_cases/${options.project}/`// 确定项目用例目录
+    const folders = fs.readdirSync(scenarios_path)
+    let folders_path = []
+    let scenarios = []
+    folders.forEach(function (item, index) {
+        let stat = fs.lstatSync(scenarios_path + item)
+        if (stat.isDirectory() === true) {
+            folders_path.push(scenarios_path + item)
+        }
+    })
+
+// 根目录下的scenarios与这个文件的区别在于路径调用不一样
+    for (const folder of folders_path) {
+        let all_files = fs.readdirSync(folder)
+        let files = []
+        var path_arr = folder.split("/");
+        path_arr.splice(1,1)
+        const reg = /test_.*/
+
+        for (const file of all_files) {
+            if (reg.test(file)) files.push(file);
+        }
+       
+        files.forEach(function (item, index) {
+            let file_path = path_arr.join("/") + "/" + item
+
+            let test_cases = require(file_path).scenarios
+            scenarios = scenarios.concat(test_cases)
+        })
+    }
+
+    
+    return {
+        "scenarios":[
+            ...scenarios
+        ]
+    }
+}
+```
+
+### project_configs/scenarios_configs.js
+一个用例类，提取默认配置对单个用例进行填充
+```
+class Scenarios {
+    constructor(project, type) {
+        const project_config = require(`./${project}/constants_config`);
+        this.type = type;
+        this.DEFAULT_URL = project_config.DEFAULT_URL;
+        this.DEFAULT_MISMATCHTHRESHOLD = project_config.DEFAULT_MISMATCHTHRESHOLD;
+        this.DEFAULT_REQUIRE_SAME_DIMENSIONS = project_config.DEFAULT_REQUIRE_SAME_DIMENSIONS;
+        this.VIEWPORTS = project_config.VIEWPORTS[type];
+
+        this.PAGE_ELEMENTS_PATH = `./${project}/elements/`;
+        this.PROJECT_SCRIPT_PATH = `puppet/${project}/`;
+        this.COOKIES_PATH = `project_configs/${project}/cookies/`;
+
+        this.scenarios = []
+    }
+
+    get_elementpage(element_file) {
+        return require(this.PAGE_ELEMENTS_PATH + element_file)
+    }
+
+    testCases(options) {
+        this.scenarios.push(options)
+    }
+
+    generate_cases() {
+        var allScenarios = {"scenarios":[]}
+        for(const acase of this.scenarios) {
+            acase.label = this.type + '_' + acase.label
+            if ((!acase.hasOwnProperty("url")) && (!acase.hasOwnProperty("url_path"))) {
+                acase.url = this.DEFAULT_URL
+            }
+            if (acase.hasOwnProperty("url_path")) {
+                acase.url = this.DEFAULT_URL + acase.url_path;
+                delete acase.url_path
+            }
+            if (!acase.hasOwnProperty("viewports")) {
+                acase.viewports = this.VIEWPORTS
+            }
+            if (!acase.hasOwnProperty("misMatchThreshold")) {
+                acase.misMatchThreshold = this.DEFAULT_MISMATCHTHRESHOLD
+            }
+            if (!acase.hasOwnProperty("requireSameDimensions")) {
+                acase.requireSameDimensions = this.DEFAULT_REQUIRE_SAME_DIMENSIONS
+            }
+            if (acase.hasOwnProperty("onReadyScript") && (acase.onReadyScript != "puppet/common/onReady.js") ) {
+                acase.onReadyScript = this.PROJECT_SCRIPT_PATH + acase.onReadyScript
+            }
+            if (acase.hasOwnProperty("onBeforeScript") && (acase.onBeforeScript != "puppet/common/onBefore.js") ) {
+                acase.onBeforeScript = this.PROJECT_SCRIPT_PATH + acase.onBeforeScript
+            }
+            if (acase.hasOwnProperty("cookiePath")) {
+                acase.cookiePath = this.COOKIES_PATH + acase.cookiePath
+            }
+
+            allScenarios.scenarios.push(acase)
+        }
+
+        return {
+            allScenarios
+        }
+        
+    }
+
+}
+
+module.exports = Scenarios
+```
+
+
+### constants_config.js
+保存项目基本信息
+```
+exports.DEFAULT_URL = 'https://bigquant.com/'
+
+exports.DEFAULT_MISMATCHTHRESHOLD = 0.01
+
+exports.DEFAULT_REQUIRE_SAME_DIMENSIONS = true
+
+exports.VIEWPORTS ={
+    'desktop': [
+    {
+    "label": "desktop",
+    "width": 1920,
+    "height": 1080
+    }
+    ]
+}
+```
+
+### test_*.js
+用例
+```
+const Scenarios = require('../../../project_configs/scenarios_config')
+
+var testScenarios = new Scenarios('bq_web','desktop')
+
+const mainpage = testScenarios.get_elementpage('mainpage_ele')
+
+// 用例描述
+testScenarios.testCases(
+    {
+        "label": "Mainpage_Guidetab nologin",
+        "selector": mainpage.main['guidetab_area'],
+        "readySelector": mainpage.main['mine_area'],
+        "misMatchThreshold" : 1.5
+    }
+)
+
+testScenarios.testCases(
+    {
+        "label": "Mainpage_Guidetab login",
+        "cookiePath": "desktop_itsatest.json",
+        "onBeforeScript": "puppet/common/onBefore.js",
+        "clickSelector":mainpage.main['guidetab_button'],
+        "selector": mainpage.main['guidetab_area'],
+        "readySelector": mainpage.main['mine_area'],
+        "misMatchThreshold" : 1.5
+    }
+)
+
+module.exports = testScenarios.generate_cases().allScenarios
+```
+
+## backstopjs_framework
+目录树如下
+```
+backstopjs_framework
+│  backstop.config.js // 默认配置
+│  backstop.js      // 配置生成、测试运行脚本
+│  bq_web_backstop.json // 测试配置
+│  scenarios.js     // 用例处理脚本
+│  
+├─engine_scripts
+│  └─puppet
+│      ├─bq_web
+│      │      mainpage_banner_check.js
+│      │      项目脚本
+│      │      
+│      └─common
+│              base.js
+│              onBefore.js
+│              onReady.js
+│              通用脚本
+│          
+├─projects_cases
+│  └─bq_web
+│      │  project_path_config.js // 路径配置文件
+│      │  
+│      ├─desktop
+│      │      constants.js  //默认配置
+│      │      test_armorypage_general.js
+│      │      测试脚本
+│      │      
+│      ├─phone
+│      └─table
+├─projects_data // 测试结果保存
+│  └─bq_web
+│          test_data.txt
+│          
+└─project_configs
+    └─bq_web
+        │  common_config.js //通用配置
+        │  
+        ├─cookies
+        │      desktop_itsatest.json
+        │      cookies文件
+        │     
+        └─elements
+                armorypage_ele.js
+        页面元素定位配置
+```
+
+
+
 
 ### scenarios.js
 相比于原版，增加目录下用例查找功能，增加对默认字段的检查、填充。
@@ -317,70 +544,6 @@ exports.COOKIES_PATH = './project_configs/bq_web/cookies/'
 exports.PROJECT_SCRIPT_PATH = 'puppet/bq_web/'
 
 ```
-## backstopjs_framework_2nd
-目录树如下
-```
-backstopjs_framework_2nd
-│  backstop.config.js
-│  backstop.js
-│  bq_web_backstop.json
-│  package.json
-│  scenarios.js
-│  
-├─engine_scripts
-│  └─puppet
-│      ├─bq_web
-│      │      mainpage_banner_check.js
-│      │      mainpage_strategy_check.js
-│      │      project_path_config.js
-│      │      tutorialpage_check.js
-│      │      tutorialpage_new1.js
-│      │      
-│      └─common
-│              base.js
-│              clickAndHoverHelper.js
-│              delay.js
-│              ignoreCSP.js
-│              interceptImages.js
-│              loadCookies.js
-│              onBefore.js
-│              onReady.js
-│              
-├─projects_cases
-│  └─bq_web
-│      ├─desktop
-│      │      test_armorypage_general.js
-│      │      test_codepage_general.js
-│      │      test_docspage.js
-│      │      test_mainpage_banner.js
-│      │      test_mainpage_guidetab.js
-│      │      test_mainpage_other.js
-│      │      test_mainpage_strategy.js
-│      │      test_tradepage_general.js
-│      │      test_tutorialpage.js
-│      │      
-│      ├─phone
-│      └─table
-├─projects_data
-│  └─bq_web
-│          test_data.txt
-│          
-└─project_configs
-    └─bq_web
-        │  common_config.js
-        │  
-        ├─cookies
-        │      desktop_itsatest.json
-        │      
-        └─elements
-                armorypage_ele.js
-                codepage_ele.js
-                docspage_ele.js
-                mainpage_ele.js
-                tradepage_ele.js
-                tutorialpage_ele.js
-```
-与backstopjs_framework类似，将配置文件统一，直接在用例中体现，而非在生成配置时添加。
 
 ## backstopjs_framework_simple
 目录树如下
