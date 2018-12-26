@@ -1,78 +1,77 @@
-const default_config = require('../../../project_configs/bq_web/common_config')
-const tutorialpage = require(default_config.PAGE_ELEMENTS_PATH + 'tutorialpage_ele')
+const Scenarios = require('../../../project_configs/scenarios_config')
 
-var test_cases = {
-    "scenarios":[
-      {
-        "label":default_config.DEFAULT_DESKTOP_CONF['prefix_label'] + "Tutorialpage_Main",
-        "url": default_config.DEFAULT_URL + 'tutorial/',
-        "onReadyScript": default_config.PROJECT_SCRIPT_PATH + 'tutorialpage_new1.js',
-        "viewports": default_config.DEFAULT_DESKTOP_CONF['viewports'],
-        "misMatchThreshold": default_config.DEFAULT_MISMATCHTHRESHOLD,
-        "requireSameDimensions": default_config.DEFAULT_REQUIRE_SAME_DIMENSIONS
-      },
-      {
-        "label":default_config.DEFAULT_DESKTOP_CONF['prefix_label'] + "Tutorialpage_Ai",
-        "url": default_config.DEFAULT_URL + 'tutorial/',
-        "clickSelector": tutorialpage.main['ai'],
-        "hoverSelector": tutorialpage.posts['ai_4'],
-        "onReadyScript": default_config.PROJECT_SCRIPT_PATH + 'tutorialpage_check.js',
-        "viewports": default_config.DEFAULT_DESKTOP_CONF['viewports'],
-        "misMatchThreshold": default_config.DEFAULT_MISMATCHTHRESHOLD,
-        "requireSameDimensions": default_config.DEFAULT_REQUIRE_SAME_DIMENSIONS
-      },
-      {
-        "label":default_config.DEFAULT_DESKTOP_CONF['prefix_label'] + "Tutorialpage_Bigstudio",
-        "url": default_config.DEFAULT_URL + 'tutorial/',
-        "clickSelector": tutorialpage.main['bigstudio'],
-        "hoverSelector": tutorialpage.posts['bigstudio_4'],
-        "onReadyScript": default_config.PROJECT_SCRIPT_PATH + 'tutorialpage_check.js',
-        "viewports": default_config.DEFAULT_DESKTOP_CONF['viewports'],
-        "misMatchThreshold": default_config.DEFAULT_MISMATCHTHRESHOLD,
-        "requireSameDimensions": default_config.DEFAULT_REQUIRE_SAME_DIMENSIONS
-      },
-      {
-        "label":default_config.DEFAULT_DESKTOP_CONF['prefix_label'] + "Tutorialpage_Ceying",
-        "url": default_config.DEFAULT_URL + 'tutorial/',
-        "clickSelector": tutorialpage.main['ceying'],
-        "hoverSelector": tutorialpage.posts['ceying_4'],
-        "onReadyScript": default_config.PROJECT_SCRIPT_PATH + 'tutorialpage_check.js',
-        "viewports": default_config.DEFAULT_DESKTOP_CONF['viewports'],
-        "misMatchThreshold": default_config.DEFAULT_MISMATCHTHRESHOLD,
-        "requireSameDimensions": default_config.DEFAULT_REQUIRE_SAME_DIMENSIONS
-      },
-      {
-        "label":default_config.DEFAULT_DESKTOP_CONF['prefix_label'] + "Tutorialpage_Jinr",
-        "url": default_config.DEFAULT_URL + 'tutorial/',
-        "clickSelector": tutorialpage.main['jinr'],
-        "hoverSelector": tutorialpage.posts['jinr_4'],
-        "onReadyScript": default_config.PROJECT_SCRIPT_PATH + 'tutorialpage_check.js',
-        "viewports": default_config.DEFAULT_DESKTOP_CONF['viewports'],
-        "misMatchThreshold": default_config.DEFAULT_MISMATCHTHRESHOLD,
-        "requireSameDimensions": default_config.DEFAULT_REQUIRE_SAME_DIMENSIONS
-      },
-      {
-        "label":default_config.DEFAULT_DESKTOP_CONF['prefix_label'] + "Tutorialpage_Math",
-        "url": default_config.DEFAULT_URL + 'tutorial/',
-        "clickSelector": tutorialpage.main['math'],
-        "hoverSelector": tutorialpage.posts['math_4'],
-        "onReadyScript": default_config.PROJECT_SCRIPT_PATH + 'tutorialpage_check.js',
-        "viewports": default_config.DEFAULT_DESKTOP_CONF['viewports'],
-        "misMatchThreshold": default_config.DEFAULT_MISMATCHTHRESHOLD,
-        "requireSameDimensions": default_config.DEFAULT_REQUIRE_SAME_DIMENSIONS
-      },
-      {
-        "label":default_config.DEFAULT_DESKTOP_CONF['prefix_label'] + "Tutorialpage_Python",
-        "url": default_config.DEFAULT_URL + 'tutorial/',
-        "clickSelector": tutorialpage.main['python'],
-        "hoverSelector": tutorialpage.posts['python_4'],
-        "onReadyScript": default_config.PROJECT_SCRIPT_PATH + 'tutorialpage_check.js',
-        "viewports": default_config.DEFAULT_DESKTOP_CONF['viewports'],
-        "misMatchThreshold": default_config.DEFAULT_MISMATCHTHRESHOLD,
-        "requireSameDimensions": default_config.DEFAULT_REQUIRE_SAME_DIMENSIONS
-      },
-    ]
-}
+var testScenarios = new Scenarios('bq_web','desktop')
+
+const tutorialpage = testScenarios.get_elementpage('tutorialpage_ele')
 
 
-module.exports = test_cases
+
+testScenarios.testCases(
+    {
+      "label":"Tutorialpage_Main",
+      "url_path": 'tutorial/',
+      "onReadyScript": 'tutorialpage_new1.js' 
+    }
+)
+
+testScenarios.testCases(
+    {
+      "label":"Tutorialpage_Ai",
+      "url_path": 'tutorial/',
+      "clickSelector": tutorialpage.main['ai'],
+      "hoverSelector": tutorialpage.posts['ai_4'],
+      "onReadyScript": 'tutorialpage_check.js'
+    }
+)
+
+testScenarios.testCases(
+    {
+      "label":"Tutorialpage_Bigstudio",
+      "url_path": 'tutorial/',
+      "clickSelector": tutorialpage.main['bigstudio'],
+      "hoverSelector": tutorialpage.posts['bigstudio_4'],
+      "onReadyScript": 'tutorialpage_check.js'
+    }
+)
+
+testScenarios.testCases(
+    {
+      "label":"Tutorialpage_Ceying",
+      "url_path": 'tutorial/',
+      "clickSelector": tutorialpage.main['ceying'],
+      "hoverSelector": tutorialpage.posts['ceying_4'],
+      "onReadyScript": 'tutorialpage_check.js'
+    }
+)
+
+testScenarios.testCases(    
+    {
+      "label":"Tutorialpage_Jinr",
+      "url_path": 'tutorial/',
+      "clickSelector": tutorialpage.main['jinr'],
+      "hoverSelector": tutorialpage.posts['jinr_4'],
+      "onReadyScript": 'tutorialpage_check.js'
+    }
+)
+
+testScenarios.testCases(
+    {
+      "label":"Tutorialpage_Math",
+      "url_path": 'tutorial/',
+      "clickSelector": tutorialpage.main['math'],
+      "hoverSelector": tutorialpage.posts['math_4'],
+      "onReadyScript": 'tutorialpage_check.js'
+    }
+)
+
+testScenarios.testCases(    
+    {
+      "label":"Tutorialpage_Python",
+      "url_path": 'tutorial/',
+      "clickSelector": tutorialpage.main['python'],
+      "hoverSelector": tutorialpage.posts['python_4'],
+      "onReadyScript": 'tutorialpage_check.js'
+    }
+)
+
+module.exports = testScenarios.generate_cases().allScenarios

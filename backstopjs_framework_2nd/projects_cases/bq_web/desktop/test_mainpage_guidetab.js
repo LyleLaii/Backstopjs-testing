@@ -1,30 +1,28 @@
-const default_config = require('../../../project_configs/bq_web/common_config')
-const mainpage = require(default_config.PAGE_ELEMENTS_PATH + 'mainpage_ele')
+const Scenarios = require('../../../project_configs/scenarios_config')
 
+var testScenarios = new Scenarios('bq_web','desktop')
 
-var test_cases = {
-    "scenarios":[
-      {
-        "label":default_config.DEFAULT_DESKTOP_CONF['prefix_label'] + "Mainpage_Guidetab nologin",
-        "url": default_config.DEFAULT_URL,
-        "selectors": [mainpage.main['guidetab_area']],
-        "viewports": default_config.DEFAULT_DESKTOP_CONF['viewports'],
-        "requireSameDimensions": default_config.DEFAULT_REQUIRE_SAME_DIMENSIONS,
+const mainpage = testScenarios.get_elementpage('mainpage_ele')
+
+testScenarios.testCases(
+    {
+        "label": "Mainpage_Guidetab nologin",
+        "selector": mainpage.main['guidetab_area'],
+        "readySelector": mainpage.main['mine_area'],
         "misMatchThreshold" : 1.5
-      },
-      {
-        "label":default_config.DEFAULT_DESKTOP_CONF['prefix_label'] + "Mainpage_Guidetab login",
-        "url": default_config.DEFAULT_URL,
-        "cookiePath": default_config.COOKIES_PATH + "desktop_itsatest.json",
+    }
+)
+
+testScenarios.testCases(
+    {
+        "label": "Mainpage_Guidetab login",
+        "cookiePath": "desktop_itsatest.json",
         "onBeforeScript": "puppet/common/onBefore.js",
-        "clickSelectors":[mainpage.main['guidetab_button']],
-        "selectors": [mainpage.main['guidetab_area']],
-        "viewports": default_config.DEFAULT_DESKTOP_CONF['viewports'],
-        "requireSameDimensions": default_config.DEFAULT_REQUIRE_SAME_DIMENSIONS,
+        "clickSelector":mainpage.main['guidetab_button'],
+        "selector": mainpage.main['guidetab_area'],
+        "readySelector": mainpage.main['mine_area'],
         "misMatchThreshold" : 1.5
-      }
-    ]
-}
+    }
+)
 
-
-module.exports = test_cases
+module.exports = testScenarios.generate_cases().allScenarios

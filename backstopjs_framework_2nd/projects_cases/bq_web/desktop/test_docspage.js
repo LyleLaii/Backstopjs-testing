@@ -1,19 +1,16 @@
-const default_config = require('../../../project_configs/bq_web/common_config')
-const docspage = require(default_config.PAGE_ELEMENTS_PATH + 'docspage_ele')
+const Scenarios = require('../../../project_configs/scenarios_config')
 
-var test_cases = {
-    "scenarios":[
-      {
-        "label":default_config.DEFAULT_DESKTOP_CONF['prefix_label'] + "Docspage_Usinghelp",
-        "url": default_config.DEFAULT_URL + 'docs/#/usinghelp',
-        "viewports": default_config.DEFAULT_DESKTOP_CONF['viewports'],
-        "misMatchThreshold": default_config.DEFAULT_MISMATCHTHRESHOLD,
-        "requireSameDimensions": default_config.DEFAULT_REQUIRE_SAME_DIMENSIONS,
+var testScenarios = new Scenarios('bq_web','desktop')
+
+const docspage = testScenarios.get_elementpage('docspage_ele')
+
+testScenarios.testCases(
+    {
+        "label": "Docspage_Usinghelp general",
+        "url_path": 'docs/#/usinghelp',
         "readySelector": docspage.main['main_area'],
-        "delay": 2000
-      }
-    ]
-}
+        "delay": 2000 
+    }
+)
 
-
-module.exports = test_cases
+module.exports = testScenarios.generate_cases().allScenarios
