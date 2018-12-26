@@ -7,7 +7,7 @@ const mainpage = testScenarios.get_elementpage('mainpage_ele')
 testScenarios.testCases(
     {
         "label": "Mainpage_Guidetab nologin",
-        "selector": mainpage.main['guidetab_area'],
+        "selectors": [mainpage.main['guidetab_area']],
         "readySelector": mainpage.main['mine_area'],
         "misMatchThreshold" : 1.5
     }
@@ -18,8 +18,8 @@ testScenarios.testCases(
         "label": "Mainpage_Guidetab login",
         "cookiePath": "desktop_itsatest.json",
         "onBeforeScript": "puppet/common/onBefore.js",
-        "clickSelector":mainpage.main['guidetab_button'],
-        "selector": mainpage.main['guidetab_area'],
+        "clickSelectors":[mainpage.main['guidetab_button']],
+        "selectors": [mainpage.main['guidetab_area']],
         "readySelector": mainpage.main['mine_area'],
         "misMatchThreshold" : 1.5
     }

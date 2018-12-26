@@ -10,8 +10,7 @@ for (var i=1;i<=banner_number;i++) {
         {
             "label": `Mainpage_Banner${i}`,
             "clickSelectors":[mainpage.guidetab['close_button'], `#carouselIndicators > ol > li:nth-child(${i})`],
-            "readySelector": mainpage.main['mine_area'],
-            "selector": mainpage.main['banner_area']
+            "selectors": [mainpage.main['banner_area']]
         }
     )
 }

@@ -16,7 +16,7 @@ testScenarios.testCases(
         }],
       "removeSelectors": [mainpage.main['navigate_area'], mainpage.main['guide_icon']],
       "readySelector": mainpage.main['mine_area'],
-      "clickSelector":mainpage.guidetab['close_button'],
+      "clickSelectors":[mainpage.guidetab['close_button']],
       "selectors": [mainpage.main['strategy_area']]
   }
 )

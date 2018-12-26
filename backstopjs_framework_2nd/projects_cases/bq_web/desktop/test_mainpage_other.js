@@ -9,7 +9,7 @@ testScenarios.testCases(
         "label": "Mainpage_Other general",
         "hideSelectors": [mainpage.main['navigate_area'],mainpage.main['banner_area'],mainpage.main['strategy_area']],
         "removeSelectors": [mainpage.main['guide_icon'],mainpage.main['support_icon']],
-        "clickSelector": mainpage.guidetab['close_button']
+        "clickSelectors": [mainpage.guidetab['close_button']]
     }
 )
 

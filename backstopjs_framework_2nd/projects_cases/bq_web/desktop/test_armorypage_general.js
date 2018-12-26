@@ -17,7 +17,7 @@ testScenarios.testCases(
 testScenarios.testCases(
     {
         "label": "Armorypage_Shared general",
-        "url_path": 'armory/mine',
+        "url_path": 'armory/shared',
         "readySelector": armorypage.main['shared_area'],
         "delay": 1000 
     }
@@ -26,7 +26,7 @@ testScenarios.testCases(
 testScenarios.testCases(
   {
       "label": "Armorypage_Mall general",
-      "url_path": 'armory/mine',
+      "url_path": 'armory/mall',
       "readySelector": armorypage.main['mall_area'],
       "delay": 1000 
   }
