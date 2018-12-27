@@ -74,4 +74,4 @@ testScenarios.testCases(
     }
 )
 
-module.exports = testScenarios.generate_cases().allScenarios
+module.exports = testScenarios.generate_cases()

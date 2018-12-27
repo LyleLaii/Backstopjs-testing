@@ -15,4 +15,4 @@ for (var i=1;i<=banner_number;i++) {
     )
 }
 
-module.exports = testScenarios.generate_cases().allScenarios
+module.exports = testScenarios.generate_cases()

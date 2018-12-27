@@ -55,9 +55,7 @@ class Scenarios {
             allScenarios.scenarios.push(acase)
         }
 
-        return {
-            allScenarios
-        }
+        return allScenarios
         
     }
 
